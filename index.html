@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evoque - Shop, Cart & Contact</title>
+<style>
+  :root {
+    --primary-color: #2c2c2c;
+    --secondary-color: #b5a89f;
+    --accent-color: #6d5c5b;
+    --background-color: #f8f6f4;
+    --text-color: #333;
+  }
+  body { font-family: Arial, sans-serif; background-color: var(--background-color); color: var(--text-color); margin: 0; padding: 0; }
+  .header { background-color: var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: white; text-align: center; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 10px; }
+  .nav button { background: var(--secondary-color); border: none; font-size: 16px; cursor: pointer; padding: 10px; color: white; border-radius: 5px; }
+  .nav button:hover { background: var(--accent-color); }
+  .section { display: none; padding: 20px; }
+  .active { display: block; }
+  .cart table { width: 100%; border-collapse: collapse; background: white; }
+  .cart th, .cart td { padding: 10px; border: 1px solid var(--secondary-color); text-align: center; }
+  .footer { text-align: center; padding: 10px 0; background-color: var(--primary-color); color: white; margin-top: 20px; }
+</style>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<div class="header">
+  <h1>Evoque</h1>
+  <div class="nav">
+    <button onclick="showSection('shop')">Shop</button>
+    <button onclick="showSection('cart')">Cart</button>
+    <button onclick="showSection('contact')">Contact</button>
+  </div>
+</div>
+
+<div id="shop" class="section active">
+  <h2>Shop</h2>
+  <p>Browse our latest fashion collection.</p>
+  <p>Product 1 - ₹3999 <button>Add to Cart</button></p>
+</div>
+
+<div id="cart" class="section">
+  <h2>Your Cart</h2>
+  <table>
+    <tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
+    <tr><td>Product 1</td><td>₹3999</td><td>1</td><td>₹3999</td></tr>
+  </table>
+  <button onclick="payNow()">Proceed to Payment</button>
+</div>
+
+<div id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Email: support@evoque.com</p>
+  <p>Phone: +91 99999 99999</p>
+</div>
+
+<script>
+  function showSection(section) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(section).classList.add('active');
+  }
+  
+  function payNow() {
+    var options = {
+      "key": "YOUR_RAZORPAY_KEY",
+      "amount": "399900",
+      "currency": "INR",
+      "name": "Evoque",
+      "description": "Order Payment",
+      "handler": function (response) {
+        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+      },
+      "method": { "netbanking": 1, "card": 1, "wallet": 1, "upi": 1 }
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
+  }
+</script>
+
+<div class="footer">
+  <p>&copy; 2025 Evoque. All Rights Reserved.</p>
+</div>
+</body>
+</html>
