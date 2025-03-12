@@ -13,7 +13,8 @@
     --text-color: #333;
   }
   body { font-family: Arial, sans-serif; background-color: var(--background-color); color: var(--text-color); margin: 0; padding: 0; }
-  .header { background-color: var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: white; text-align: center; }
+  .header { background-color: var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: white; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .header img { height: 50px; }
   .nav { display: flex; justify-content: center; gap: 20px; padding: 10px; }
   .nav button { background: var(--secondary-color); border: none; font-size: 16px; cursor: pointer; padding: 10px; color: white; border-radius: 5px; }
   .nav button:hover { background: var(--accent-color); }
@@ -27,12 +28,14 @@
 </head>
 <body>
 <div class="header">
+  <img src="logo.png" alt="Evoque Logo">
   <h1>Evoque</h1>
-  <div class="nav">
-    <button onclick="showSection('shop')">Shop</button>
-    <button onclick="showSection('cart')">Cart</button>
-    <button onclick="showSection('contact')">Contact</button>
-  </div>
+</div>
+
+<div class="nav">
+  <button onclick="showSection('shop')">Shop</button>
+  <button onclick="showSection('cart')">Cart</button>
+  <button onclick="showSection('contact')">Contact</button>
 </div>
 
 <div id="shop" class="section active">
